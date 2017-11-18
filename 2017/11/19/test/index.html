@@ -7,7 +7,7 @@
     
 
     <title>
-      Aonan Guan 
+      test | Aonan Guan 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,12 +16,13 @@
     
     
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Aonan Guan">
-<meta property="og:url" content="http://yoursite.com/index.html">
+    <meta property="og:type" content="article">
+<meta property="og:title" content="test | Aonan Guan">
+<meta property="og:url" content="http://yoursite.com/2017/11/19/test/index.html">
 <meta property="og:site_name" content="Aonan Guan">
+<meta property="og:updated_time" content="2017-11-18T17:29:59.186Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aonan Guan">
+<meta name="twitter:title" content="test | Aonan Guan">
     
     
     
@@ -41,8 +42,8 @@
     </span>
 
     
- 
-<header class="panel-cover">
+
+<header class="panel-cover panel-cover--collapsed">
 
 
   <div class="panel-main">
@@ -141,64 +142,48 @@ classes that you can use:
         <div class="content-wrapper__inner entry">
             
 
+<article class="post-container post-container--single">
 
-   <!-- do nothing -->
-
-
-<div class="main-post-list">
-    <ol class="post-list">
+  <header class="post-header">
     
-    
-    <li>
+    <h1 class="post-title">test</h1>
 
-      <h2 class="post-list__post-title post-title">
-        <a href="/2017/11/19/test/" title="link to test">test</a>
-      </h2>
-
-      <div class="post-list__meta">
-
-        <time datetime="2017-11-19" class="post-list__meta--date date">2017-11-19</time> 
-      </div>
-
-      <div class="excerpt">
-        
-      </div>
-
-      <hr class="post-list__divider" />
-    </li>
-    
-    <li>
-
-      <h2 class="post-list__post-title post-title">
-        <a href="/2017/11/19/First-exploration-on-C#-for-Intel-RealSense/" title="link to First exploration on C# for Intel RealSense">First exploration on C# for Intel RealSense</a>
-      </h2>
-
-      <div class="post-list__meta">
-
-        <time datetime="2017-11-19" class="post-list__meta--date date">2017-11-19</time> 
-      </div>
-
-      <div class="excerpt">
-        
-      </div>
-
-      <hr class="post-list__divider" />
-    </li>
-    
-  </ol>
-
-  <hr class="post-list__divider " />
-
-<nav class="pagination" role="navigation">
     
 
-    <span class="pagination__page-number"> 1 / 1</span>
+    <div class="post-meta">
+      <time datetime="2017-11-19" class="post-meta__date date">2017-11-19</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
     
     
-</nav>
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    <% if (config.duoshuo_shortname && page.comments){ %>
+     
+</section>
+
+<% } %>
+</section>
 
 
-</div>
+</article>
+
+
             <footer class="footer">
 
     <span class="footer__copyright">&copy; 2017.| Aonan Guan </span>
@@ -226,6 +211,18 @@ classes that you can use:
 
 
     
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
     
     
     <!--kill ie6 -->
