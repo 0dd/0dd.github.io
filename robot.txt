@@ -1,0 +1,15 @@
+# hexo robots.txt
+User-agent: * Allow: /
+Allow: /archives/
+Allow: /about/
+Allow: /archive/
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+
+Sitemap: http://oddguan.com/sitemap.xml
+Sitemap: http://oddguan.com/baidusitemap.xml
+
