@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[First exploration on C# for Intel RealSense]]></title>
+    <url>%2F2017%2F11%2F19%2FFirst-exploration-on-C-for-Intel-RealSense-Camera%2F</url>
+    <content type="text"><![CDATA[Deploy the running environmentFor the first thing I would like to mention is that the SDK for Intel RealSense SR300 has not been supported any more. However the previous SDK could still be found on their Website. Since my goal is to use the RealSense to detect the user’s face. I first tried the SDK R3 by downloading the individual component. After installing the Face Tracking component a SDK samples folder will be automatically generated on the desktop folder. Create a Hello World AppIn this part I first create a UWP blank App by using Visual Studio 2015. When I tried to add the essential references to this blank App I find out that SDK for Face Module is incomplete. RealSense essential reference could be added RealSense face module reference could not be added because of lacking of winmd file This is my first trial on RealSense R3 SDK for UWP App. I will follow up it these days.]]></content>
+      <tags>
+        <tag>C#</tag>
+        <tag>UWP</tag>
+        <tag>Intel</tag>
+        <tag>RealSense</tag>
+      </tags>
+  </entry>
+</search>
