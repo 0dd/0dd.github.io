@@ -1,1 +1,1 @@
-http://oddguan.com/2017/11/19/First-exploration-on-C-for-Intel-RealSense-Camera/
+http://oddguan.com/2017/11/22/C-RealSense-Project-Facial-Landmark/

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      A C# Project to detect facial landmarks by using Intel RealSense SR300 | Aonan Guan 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="Aonan">
+    
+    
+
+    <meta name="description" content="1 Deploy the running environment1.1 Install the driver for Intel RealSense SR300The Intel RealSense has already been stopped supporting, however there are still many existing material could be used. B">
+<meta name="keywords" content="C#,Intel,RealSense,WPF,landmark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A C# Project to detect facial landmarks by using Intel RealSense SR300 | Aonan Guan">
+<meta property="og:url" content="http://oddguan.com/2017/11/22/C-RealSense-Project-Facial-Landmark/index.html">
+<meta property="og:site_name" content="Aonan Guan">
+<meta property="og:description" content="1 Deploy the running environment1.1 Install the driver for Intel RealSense SR300The Intel RealSense has already been stopped supporting, however there are still many existing material could be used. B">
+<meta property="og:image" content="https://ws3.sinaimg.cn/bmiddle/006tNc79gy1floi9pj8h4j30j404mgm6.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1floibd7vibj30f40b2wfa.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1floiun3m6gj30o00fewgl.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1flmp7jxzsoj31cs0sc77m.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1flokx0jihej31f4116wph.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1flp0cy58t5j31kw10ln89.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1flp0ef7lnsj31540t4dja.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1flp0rasvupj31kw10ogsp.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1flr16jp7j4j30is09cmxq.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1flr17qz2qmj30tq0m6aba.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/bmiddle/006tNc79gy1flr188g29sj30f40by3yw.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/bmiddle/006tNc79gy1flr1aflt4nj30n80g6mxk.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/bmiddle/006tNc79gy1flr61v8je1j30ee0hqgns.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1flp1cydy90j30yo0nsadv.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1flr6bf75fej30xx0rz76k.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/bmiddle/006tNc79gy1flr6ckv1scj30nm0famxk.jpg">
+<meta property="og:updated_time" content="2017-11-22T15:52:45.530Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A C# Project to detect facial landmarks by using Intel RealSense SR300 | Aonan Guan">
+<meta name="twitter:description" content="1 Deploy the running environment1.1 Install the driver for Intel RealSense SR300The Intel RealSense has already been stopped supporting, however there are still many existing material could be used. B">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/bmiddle/006tNc79gy1floi9pj8h4j30j404mgm6.jpg">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Aonan Guan</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">Blog</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">About Me</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">Archieve</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">A C# Project to detect facial landmarks by using Intel RealSense SR300</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-11-22" class="post-meta__date date">2017-11-22</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/C/">C#</a>, <a class="tags-link" href="/tags/Intel/">Intel</a>, <a class="tags-link" href="/tags/RealSense/">RealSense</a>, <a class="tags-link" href="/tags/WPF/">WPF</a>, <a class="tags-link" href="/tags/landmark/">landmark</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h2 id="1-Deploy-the-running-environment"><a href="#1-Deploy-the-running-environment" class="headerlink" title="1 Deploy the running environment"></a>1 Deploy the running environment</h2><h3 id="1-1-Install-the-driver-for-Intel-RealSense-SR300"><a href="#1-1-Install-the-driver-for-Intel-RealSense-SR300" class="headerlink" title="1.1 Install the driver for Intel RealSense SR300"></a>1.1 Install the driver for Intel RealSense SR300</h3><p>The Intel RealSense has already been stopped supporting, however there are still many existing material could be used. Before we start our project, the first thing we want to do is to download the driver of SR300 from their <a href="https://software.intel.com/en-us/realsense-sdk-windows-eol" target="_blank" rel="external">website</a>.</p>
+<p><img src="https://ws3.sinaimg.cn/bmiddle/006tNc79gy1floi9pj8h4j30j404mgm6.jpg" alt="driver"></p>
+<p>You will want to install it like below. For one thing that you need to attention is that please make sure the RealSense has already connected to your computer. If there appears any connection problem, you may want to restart your computer to make sure it works.</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1floibd7vibj30f40b2wfa.jpg" alt="dcm"></p>
+<h3 id="1-2-Install-the-SDK-for-Intel-RealSense-SR300"><a href="#1-2-Install-the-SDK-for-Intel-RealSense-SR300" class="headerlink" title="1.2 Install the SDK for Intel RealSense SR300"></a>1.2 Install the SDK for Intel RealSense SR300</h3><p>After installing the driver for SR300, you will want to install the SDK for further work. From their <a href="https://software.intel.com/en-us/realsense-sdk-windows-eol" target="_blank" rel="external">website</a> we can see that there exist both R3 and R2 SDK, please download the full SDK R2. Because the Face Tracking for R3 on their web site is in-completed also there exists many <a href="https://communities.intel.com/community/tech/realsense/blog/2017/06/20/known-issue-crash-in-libpxcfaceidcdll-in-realsense-sdk-r3" target="_blank" rel="external">problems</a>.  After the preceding  procedure please reboot your computer to apply all changes. <img src="https://ws2.sinaimg.cn/large/006tNc79gy1floiun3m6gj30o00fewgl.jpg" alt="SDK"></p>
+<h3 id="1-3-Run-the-Sample-program"><a href="#1-3-Run-the-Sample-program" class="headerlink" title="1.3 Run the Sample program"></a>1.3 Run the Sample program</h3><p>After installing the SDK, samples folder will be automatically generated on your desktop folder. </p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1flmp7jxzsoj31cs0sc77m.jpg" alt="SampleFolder"></p>
+<p>Please open the sample browser and tried some samples to make sure your computer support the SR300</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1flokx0jihej31f4116wph.jpg" alt="sampleBrowser"></p>
+<h2 id="2-Create-Your-Own-C-Project"><a href="#2-Create-Your-Own-C-Project" class="headerlink" title="2 Create Your Own C# Project"></a>2 Create Your Own C# Project</h2><h3 id="2-1-Create-a-WPF-HelloWorld-project"><a href="#2-1-Create-a-WPF-HelloWorld-project" class="headerlink" title="2.1 Create a WPF HelloWorld project"></a>2.1 Create a WPF HelloWorld project</h3><p>In this time, we recommend you to use Visual Studio 2015 to create your own project, since the SDK and the reference offered by Intel was completed before Visual Studio 2017.</p>
+<p>First you will want to create a new project by click the new Project. </p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1flp0cy58t5j31kw10ln89.jpg" alt="VShomePage"> In this time, we want to create a WPF project, the selection you want to click <img src="https://ws1.sinaimg.cn/large/006tKfTcgy1flp0ef7lnsj31540t4dja.jpg" alt="wpf">The project structure looks like below </p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1flp0rasvupj31kw10ogsp.jpg" alt="helloworld"> </p>
+<p>Before we run our HelloWorld Program, we need to configure our target CPU, since the RealSense are suggested to work with 6 generation CPU, we need to change the target CPU to X64 by doing the following steps </p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1flr16jp7j4j30is09cmxq.jpg" alt="cpu"></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1flr17qz2qmj30tq0m6aba.jpg" alt="selectspu"></p>
+<p><img src="https://ws1.sinaimg.cn/bmiddle/006tNc79gy1flr188g29sj30f40by3yw.jpg" alt="x64"></p>
+<p>Then you could run your first HelloWorld Program by clicking the start button. </p>
+<p><img src="https://ws1.sinaimg.cn/bmiddle/006tNc79gy1flr1aflt4nj30n80g6mxk.jpg" alt="helloworld"></p>
+<h3 id="2-2-Add-the-essential-references-for-from-SDK"><a href="#2-2-Add-the-essential-references-for-from-SDK" class="headerlink" title="2.2 Add the essential references for  from SDK"></a>2.2 Add the essential references for  from SDK</h3><p>Then we need to add the references from RealSense SDK so that the project we created could work with RealSense. </p>
+<p>Please right click the references at the right panel of Visual Studio,</p>
+<p><img src="https://ws4.sinaimg.cn/bmiddle/006tNc79gy1flr61v8je1j30ee0hqgns.jpg" alt="references"> </p>
+<p>Then add new references. You will want to browse to you local folder, find the “libpxcclr.dll” in the path “C:\Program Files (x86)\Intel\RSSDK\bin\x64” and add this dll file. </p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1flp1cydy90j30yo0nsadv.jpg" alt="references"></p>
+<p>After these, you need to close your Visual Studio and access “C:\Program Files (x86)\Intel\RSSDK\bin\x64” then copy the “libpxccpp2c.dll” file to your project folder “C:\Users\UserName\Documents\Visual Studio 2015\Projects\HelloWorld\HelloWorld\bin\Debug” and “C:\Users\UserName\Documents\Visual Studio 2015\Projects\HelloWorld\HelloWorld\bin\x64\Debug”</p>
+<h3 id="2-3-Capture-Your-Facial-Landmark"><a href="#2-3-Capture-Your-Facial-Landmark" class="headerlink" title="2.3 Capture Your Facial Landmark"></a>2.3 Capture Your Facial Landmark</h3><h4 id="2-3-1-Create-a-button"><a href="#2-3-1-Create-a-button" class="headerlink" title="2.3.1 Create a button"></a>2.3.1 Create a button</h4><p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1flr6bf75fej30xx0rz76k.jpg" alt="button"></p>
+<p>Find the button element from toolbox in left Panel. Simply drag it in to your main window View</p>
+<p><img src="https://ws2.sinaimg.cn/bmiddle/006tNc79gy1flr6ckv1scj30nm0famxk.jpg" alt="buttonInMainWindow"></p>
+<p>​    Your XAML code of the button may look like below</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Grid</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">Button</span> <span class="attr">x:Name</span>=<span class="string">"button"</span> <span class="attr">Content</span>=<span class="string">"Button"</span> <span class="attr">HorizontalAlignment</span>=<span class="string">"Left"</span> <span class="attr">Margin</span>=<span class="string">"153,97,0,0"</span> <span class="attr">VerticalAlignment</span>=<span class="string">"Top"</span> <span class="attr">Width</span>=<span class="string">"75"</span>/&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">Grid</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Double click the button in MainWindow it will automatically generate the C# code for you. Your C# code will look like below.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> System;</div><div class="line"><span class="keyword">using</span> System.Collections.Generic;</div><div class="line"><span class="keyword">using</span> System.Linq;</div><div class="line"><span class="keyword">using</span> System.Text;</div><div class="line"><span class="keyword">using</span> System.Threading.Tasks;</div><div class="line"><span class="keyword">using</span> System.Windows;</div><div class="line"><span class="keyword">using</span> System.Windows.Controls;</div><div class="line"><span class="keyword">using</span> System.Windows.Data;</div><div class="line"><span class="keyword">using</span> System.Windows.Documents;</div><div class="line"><span class="keyword">using</span> System.Windows.Input;</div><div class="line"><span class="keyword">using</span> System.Windows.Media;</div><div class="line"><span class="keyword">using</span> System.Windows.Media.Imaging;</div><div class="line"><span class="keyword">using</span> System.Windows.Navigation;</div><div class="line"><span class="keyword">using</span> System.Windows.Shapes;</div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">HelloWorld</span></div><div class="line">&#123;</div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line">    <span class="comment"><span class="doctag">///</span> Interaction logic for MainWindow.xaml</span></div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="title">MainWindow</span> : <span class="title">Window</span></div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">MainWindow</span>(<span class="params"></span>)</span></div><div class="line">        &#123;</div><div class="line">            InitializeComponent();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">button_Click</span>(<span class="params"><span class="keyword">object</span> sender, RoutedEventArgs e</span>)</span></div><div class="line">        &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+<h4 id="2-3-2-Initialize-your-Realsense"><a href="#2-3-2-Initialize-your-Realsense" class="headerlink" title="2.3.2 Initialize your Realsense"></a>2.3.2 Initialize your Realsense</h4><p>Add the following code before the MainWindow() function </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> PXCMSenseManager senseManager;</div><div class="line"><span class="keyword">private</span> PXCMFaceModule faceModule;</div><div class="line"><span class="keyword">private</span> PXCMFaceConfiguration faceConfig;</div><div class="line"><span class="keyword">private</span> PXCMFaceData faceData;</div><div class="line"></div><div class="line"></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="title">MainWindow</span>(<span class="params"></span>)</span></div><div class="line">      &#123;</div><div class="line">        ......</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<p>Then add the following code inside your MainWindow() function </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">MainWindow</span>(<span class="params"></span>)</span></div><div class="line">        &#123;</div><div class="line">            InitializeComponent();</div><div class="line">           </div><div class="line">            senseManager = PXCMSenseManager.CreateInstance();</div><div class="line">            senseManager.EnableFace();</div><div class="line">            senseManager.Init();</div><div class="line">         </div><div class="line">            faceModule = senseManager.QueryFace(); </div><div class="line">            faceConfig = faceModule.CreateActiveConfiguration();</div><div class="line">            faceConfig.landmarks.maxTrackedFaces = <span class="number">2</span>;</div><div class="line">            faceConfig.landmarks.isEnabled = <span class="literal">true</span>;</div><div class="line">            faceConfig.detection.maxTrackedFaces = <span class="number">2</span>;</div><div class="line">            faceConfig.detection.isEnabled = <span class="literal">true</span>;</div><div class="line">            faceConfig.EnableAllAlerts();</div><div class="line">            faceConfig.ApplyChanges();        </div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>Run your project. You will see the green light in your RealSense is on, which means your codes work.</p>
+<h4 id="2-3-3-Create-a-thread-to-capture-facial-data"><a href="#2-3-3-Create-a-thread-to-capture-facial-data" class="headerlink" title="2.3.3 Create a thread to capture facial data"></a>2.3.3 Create a thread to capture facial data</h4><p>Add these three lines on top of your C# file.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> System.Threading;</div><div class="line"><span class="keyword">using</span> System.Threading.Tasks;</div><div class="line"><span class="keyword">using</span> System.IO;</div></pre></td></tr></table></figure>
+<p>Then create a ProcessingThread() function to capture the facial data </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ProcessingThread</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Add the following while loop to refresh the data from the camera</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ProcessingThread</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// Start AcquireFrame/ReleaseFrame loop</span></div><div class="line">        <span class="keyword">while</span> (senseManager.AcquireFrame(<span class="literal">true</span>) &gt;= pxcmStatus.PXCM_STATUS_NO_ERROR)</div><div class="line">        &#123;</div><div class="line"><span class="comment">// Release the frame</span></div><div class="line">            <span class="keyword">if</span> (faceData != <span class="literal">null</span>) faceData.Dispose();</div><div class="line">            senseManager.ReleaseFrame();</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>Add the following code inside while loop to capture facial module </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">        <span class="keyword">while</span> (senseManager.AcquireFrame(<span class="literal">true</span>) &gt;= pxcmStatus.PXCM_STATUS_NO_ERROR)</div><div class="line">        &#123;</div><div class="line">            faceModule = senseManager.QueryFace();</div><div class="line">            <span class="keyword">if</span> (faceModule != <span class="literal">null</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="comment">// Retrieve the most recent processed data</span></div><div class="line">                faceData = faceModule.CreateOutput();</div><div class="line">                faceData.Update();</div><div class="line">            &#125;</div><div class="line"><span class="comment">// Release the frame</span></div><div class="line">            <span class="keyword">if</span> (faceData != <span class="literal">null</span>) faceData.Dispose();</div><div class="line">            senseManager.ReleaseFrame();</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>Then add the following code inside the while loop to traverse all the faces in faceData, and create the instance of landmark</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">while</span> (senseManager.AcquireFrame(<span class="literal">true</span>) &gt;= pxcmStatus.PXCM_STATUS_NO_ERROR)</div><div class="line">&#123;</div><div class="line">    faceModule = senseManager.QueryFace();</div><div class="line">    <span class="keyword">if</span> (faceModule != <span class="literal">null</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="comment">// Retrieve the most recent processed data</span></div><div class="line">        faceData = faceModule.CreateOutput();</div><div class="line">        faceData.Update();</div><div class="line">    &#125;</div><div class="line">   <span class="keyword">if</span> (faceData != <span class="literal">null</span>)</div><div class="line">    &#123;</div><div class="line">        Int32 nfaces = faceData.QueryNumberOfDetectedFaces();</div><div class="line">        <span class="keyword">for</span> (Int32 i = <span class="number">0</span>; i &lt; nfaces; i++)</div><div class="line">        &#123;</div><div class="line">            PXCMFaceData.Face face = faceData.QueryFaceByIndex(i);</div><div class="line">            PXCMFaceData.LandmarksData landmarkData = face.QueryLandmarks();</div><div class="line">        &#125;</div><div class="line">       </div><div class="line">    &#125;</div><div class="line">   <span class="comment">// Release the frame</span></div><div class="line">    <span class="keyword">if</span> (faceData != <span class="literal">null</span>) faceData.Dispose();</div><div class="line">    senseManager.ReleaseFrame();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Add the following codes inside your face loop to traverse all the landmark</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (Int32 i = <span class="number">0</span>; i &lt; nfaces; i++)</div><div class="line">               &#123;</div><div class="line">                   PXCMFaceData.Face face = faceData.QueryFaceByIndex(i);</div><div class="line">                   PXCMFaceData.LandmarksData landmarkData = face.QueryLandmarks();</div><div class="line">                   <span class="keyword">if</span> (landmarkData != <span class="literal">null</span>)</div><div class="line">                   &#123;</div><div class="line">                       PXCMFaceData.LandmarkPoint[] landmakrPoints;</div><div class="line">                       landmarkData.QueryPoints(<span class="keyword">out</span> landmakrPoints);</div><div class="line">                       <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; landmakrPoints.Length; j++)</div><div class="line">                       &#123;</div><div class="line"></div><div class="line">                       &#125;</div><div class="line">                       </div><div class="line">                   &#125;</div><div class="line">                  </div><div class="line">               &#125;</div></pre></td></tr></table></figure>
+<p>Add the following codes inside the landmark loop to export the coordinate </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; landmakrPoints.Length; j++)</div><div class="line">&#123;</div><div class="line"></div><div class="line">    <span class="keyword">using</span> (StreamWriter sw = File.AppendText(filePath))</div><div class="line">    &#123;</div><div class="line">        sw.WriteLine(i + <span class="string">","</span> + (j + <span class="number">1</span>) + <span class="string">","</span> + landmakrPoints[j].image.x.ToString() + <span class="string">","</span> + landmakrPoints[j].image.y.ToString());</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>You will find that there exist an error on the filePath, then we will construct it.</p>
+<h4 id="2-3-4-Construct-the-FilePath"><a href="#2-3-4-Construct-the-FilePath" class="headerlink" title="2.3.4 Construct the FilePath"></a>2.3.4 Construct the FilePath</h4><p>In this project, the filePath is consist of </p>
+<ol>
+<li>the folder path that your want your data stored in</li>
+<li>the filename </li>
+<li>the  extension</li>
+</ol>
+<p>In this time, we will store our data as a <a href="https://en.wikipedia.org/wiki/Comma-separated_values" target="_blank" rel="external">Comma separated values</a> file on our desktop and the extension should be <em>“.csv”</em>. The file name will be “landMark” going with the created time.</p>
+<p>We first create these two strings to store the time and the path, and add these two lines before the MainWindow() function.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> time = DateTime.Now.ToString(<span class="string">"M_d_hh_mm_ss"</span>);</div><div class="line">      <span class="keyword">private</span> <span class="keyword">string</span> filePath = <span class="string">@"C:\Users\csplayground\Desktop\landMark"</span>;</div></pre></td></tr></table></figure>
+<p>Then we add these two lines in MainWindow() to construct  the final filePath</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">MainWindow</span>(<span class="params"></span>)</span></div><div class="line">      &#123;</div><div class="line">          InitializeComponent();</div><div class="line">          filePath += time;</div><div class="line">          filePath += <span class="string">".csv"</span>;</div><div class="line">          ......</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<p>After that, add these lines at the beginning of the ProcessingThread() function to set the table header of data </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ProcessingThread</span>(<span class="params"></span>)</span></div><div class="line"> &#123;</div><div class="line"></div><div class="line">     <span class="keyword">using</span> (StreamWriter sw = File.AppendText(filePath))</div><div class="line">     &#123;</div><div class="line">         sw.WriteLine(<span class="string">"User ID"</span> + <span class="string">","</span> + <span class="string">"landmarkIndex"</span> + <span class="string">","</span> + <span class="string">"X"</span> + <span class="string">","</span> + <span class="string">"Y"</span>);</div><div class="line"></div><div class="line">     &#125;</div><div class="line">     ......</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h4 id="2-3-5-Invoke-the-Thread"><a href="#2-3-5-Invoke-the-Thread" class="headerlink" title="2.3.5 Invoke the Thread"></a>2.3.5 Invoke the Thread</h4><p>We then invoke the thread in the button_click() by adding these two lines</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">button_Click</span>(<span class="params"><span class="keyword">object</span> sender, RoutedEventArgs e</span>)</span></div><div class="line">&#123;</div><div class="line">    processingThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> ThreadStart(ProcessingThread));</div><div class="line">    processingThread.Start();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-Run-your-Program-and-see-the-Exported-data"><a href="#3-Run-your-Program-and-see-the-Exported-data" class="headerlink" title="3 Run your Program and see the Exported data"></a>3 Run your Program and see the Exported data</h3><p>Here is the full code of the  C# file, check if there is any missing and run it. Click the button and there will generate the exported data on your desktop. </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> System;</div><div class="line"><span class="keyword">using</span> System.Collections.Generic;</div><div class="line"><span class="keyword">using</span> System.IO;</div><div class="line"><span class="keyword">using</span> System.Linq;</div><div class="line"><span class="keyword">using</span> System.Text;</div><div class="line"><span class="keyword">using</span> System.Threading;</div><div class="line"><span class="keyword">using</span> System.Threading.Tasks;</div><div class="line"><span class="keyword">using</span> System.Windows;</div><div class="line"><span class="keyword">using</span> System.Windows.Controls;</div><div class="line"><span class="keyword">using</span> System.Windows.Data;</div><div class="line"><span class="keyword">using</span> System.Windows.Documents;</div><div class="line"><span class="keyword">using</span> System.Windows.Input;</div><div class="line"><span class="keyword">using</span> System.Windows.Media;</div><div class="line"><span class="keyword">using</span> System.Windows.Media.Imaging;</div><div class="line"><span class="keyword">using</span> System.Windows.Navigation;</div><div class="line"><span class="keyword">using</span> System.Windows.Shapes;</div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">RsNoUIWPF</span></div><div class="line">&#123;</div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line">    <span class="comment"><span class="doctag">///</span> Interaction logic for MainWindow.xaml</span></div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="title">MainWindow</span> : <span class="title">Window</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">private</span> Thread processingThread;</div><div class="line">        <span class="keyword">private</span> PXCMSenseManager senseManager;</div><div class="line">        </div><div class="line">        <span class="keyword">private</span> PXCMFaceModule faceModule;</div><div class="line">        <span class="keyword">private</span> PXCMFaceConfiguration faceConfig;</div><div class="line">        <span class="keyword">private</span> PXCMFaceData faceData;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">string</span> time = DateTime.Now.ToString(<span class="string">"M_d_hh_mm_ss"</span>);</div><div class="line">        <span class="keyword">private</span> <span class="keyword">string</span> filePath = <span class="string">@"C:\Users\csplayground\Desktop\landMark"</span>;</div><div class="line">        DateTime startTime;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">MainWindow</span>(<span class="params"></span>)</span></div><div class="line">        &#123;</div><div class="line">            InitializeComponent();</div><div class="line">            filePath += time;</div><div class="line">            filePath += <span class="string">".csv"</span>;</div><div class="line">            startTime = DateTime.Now;</div><div class="line"></div><div class="line">            <span class="comment">// Instantiate and initialize the SenseManager</span></div><div class="line">            senseManager = PXCMSenseManager.CreateInstance();</div><div class="line">            senseManager.EnableFace();</div><div class="line">            senseManager.Init();</div><div class="line">         </div><div class="line">            faceModule = senseManager.QueryFace();</div><div class="line">            faceConfig = faceModule.CreateActiveConfiguration();</div><div class="line">            faceConfig.landmarks.maxTrackedFaces = <span class="number">4</span>;</div><div class="line">            faceConfig.landmarks.isEnabled = <span class="literal">true</span>;</div><div class="line">            faceConfig.detection.maxTrackedFaces = <span class="number">4</span>;</div><div class="line">            faceConfig.detection.isEnabled = <span class="literal">true</span>;</div><div class="line">            faceConfig.EnableAllAlerts();</div><div class="line">            faceConfig.ApplyChanges();</div><div class="line"></div><div class="line"></div><div class="line">           </div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Window_Closing</span>(<span class="params"><span class="keyword">object</span> sender, System.ComponentModel.CancelEventArgs e</span>)</span></div><div class="line">        &#123;</div><div class="line">            processingThread.Abort();</div><div class="line">            <span class="keyword">if</span> (faceData != <span class="literal">null</span>) faceData.Dispose();</div><div class="line">            faceConfig.Dispose();</div><div class="line">            senseManager.Dispose();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ProcessingThread</span>(<span class="params"></span>)</span></div><div class="line">        &#123;</div><div class="line"></div><div class="line">            <span class="keyword">using</span> (StreamWriter sw = File.AppendText(filePath))</div><div class="line">            &#123;</div><div class="line">                sw.WriteLine(<span class="string">"User ID"</span> + <span class="string">","</span> + <span class="string">"landmarkIndex"</span> + <span class="string">","</span> + <span class="string">"X"</span> + <span class="string">","</span> + <span class="string">"Y"</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// Start AcquireFrame/ReleaseFrame loop</span></div><div class="line">            <span class="keyword">while</span> (senseManager.AcquireFrame(<span class="literal">true</span>) &gt;= pxcmStatus.PXCM_STATUS_NO_ERROR)</div><div class="line">            &#123;</div><div class="line">                <span class="comment">// Retrieve face data</span></div><div class="line">                </div><div class="line">                faceModule = senseManager.QueryFace();</div><div class="line">                <span class="keyword">if</span> (faceModule != <span class="literal">null</span>)</div><div class="line">                &#123;</div><div class="line">                    <span class="comment">// Retrieve the most recent processed data</span></div><div class="line">                    faceData = faceModule.CreateOutput();</div><div class="line">                    faceData.Update();</div><div class="line">                &#125;</div><div class="line"></div><div class="line"></div><div class="line">                <span class="keyword">if</span> (faceData != <span class="literal">null</span>)</div><div class="line">                &#123;</div><div class="line">                    Int32 nfaces = faceData.QueryNumberOfDetectedFaces();</div><div class="line">                    <span class="keyword">for</span> (Int32 i = <span class="number">0</span>; i &lt; nfaces; i++)</div><div class="line">                    &#123;</div><div class="line">                        PXCMFaceData.Face face = faceData.QueryFaceByIndex(i);</div><div class="line">                        PXCMFaceData.LandmarksData landmarkData = face.QueryLandmarks();</div><div class="line">                        <span class="keyword">if</span> (landmarkData != <span class="literal">null</span>)</div><div class="line">                        &#123;</div><div class="line">                            PXCMFaceData.LandmarkPoint[] landmakrPoints;</div><div class="line">                            landmarkData.QueryPoints(<span class="keyword">out</span> landmakrPoints);</div><div class="line">                            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; landmakrPoints.Length; j++)</div><div class="line">                            &#123;</div><div class="line"></div><div class="line">                                <span class="keyword">using</span> (StreamWriter sw = File.AppendText(filePath))</div><div class="line">                                &#123;</div><div class="line">                                    sw.WriteLine(i + <span class="string">","</span> + (j + <span class="number">1</span>) + <span class="string">","</span> + landmakrPoints[j].image.x.ToString() + <span class="string">","</span> + landmakrPoints[j].image.y.ToString());</div><div class="line"></div><div class="line">                                &#125;</div><div class="line"></div><div class="line">                            &#125;</div><div class="line">                            <span class="keyword">using</span> (StreamWriter sw = File.AppendText(filePath))</div><div class="line">                            &#123;</div><div class="line">                                sw.WriteLine(<span class="string">"--------------------------"</span>);</div><div class="line"></div><div class="line">                            &#125;</div><div class="line">                        &#125;</div><div class="line">                       </div><div class="line">                    &#125;</div><div class="line">                   </div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="comment">// Release the frame</span></div><div class="line">                <span class="keyword">if</span> (faceData != <span class="literal">null</span>) faceData.Dispose();</div><div class="line">                senseManager.ReleaseFrame();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">button_Click</span>(<span class="params"><span class="keyword">object</span> sender, RoutedEventArgs e</span>)</span></div><div class="line">        &#123;</div><div class="line">            processingThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> ThreadStart(ProcessingThread));</div><div class="line">            processingThread.Start();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTg5OC84NDYy">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+   <!-- <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://oddguan-com.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+   -->
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017.| Aonan Guan </span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109879230-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109879230-1');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1c95da4ba7cd45ee89d7aed3e0138716";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
